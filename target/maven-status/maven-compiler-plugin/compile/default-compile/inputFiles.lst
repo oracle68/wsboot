@@ -1,0 +1,14 @@
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\controller\BookController.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\controller\MainController.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\controller\MainRestController.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\entity\Book.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\entity\Item.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\entity\Persona.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\repository\BookRepository.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\repository\ItemRepository.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\repository\PersonaRepository.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\service\BookService.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\service\HelloService.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\service\ItemService.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\service\PersonaService.java
+C:\Users\jose\eclipse-workspace\wsboot\src\main\java\com\wsboot\WsbootApplication.java

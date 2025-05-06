@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+    <html ng-app="app">
+      <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular.js"></script>
+        <script src="http://ui-grid.info/release/ui-grid.js"></script>
+        <script src="resources/itemapp.js"></script>
+        <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+      </head>
+      <body>
+        Item List Grid
+        <br>
+        <br>
+        <div ng-controller="MainCtrl">
+        <div ui-grid="gridOptions" ui-grid-edit ui-grid-pagination></div>
+        </div>
+      </body>
+    </html>
