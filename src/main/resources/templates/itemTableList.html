@@ -1,0 +1,27 @@
+<!doctype html>
+    <html>
+      <title>Item Table List</title>
+        <!-- script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular.js"></script-->
+
+	<body>	
+<table>
+    <thead>
+        <tr>
+            <th> ID </th>
+            <th> Name </th>
+			<th> Descripcion </th>
+        </tr>
+    </thead>
+    <tbody>
+	<tr th:if="${items.empty}">
+            <td colspan="2"> No items Available </td>
+        </tr>
+        <tr th:each="item : ${items}">
+            <td><span th:text="${item.id}"> Id </span></td>
+            <td><span th:text="${item.name}"> Name </span></td>
+			<td><span th:text="${item.description}"> Desc </span></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

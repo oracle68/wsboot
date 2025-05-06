@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html><head>    <title>AngularJS ItemsList</title>  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.js"></script>  
+  <!-- script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-resource.js"></script-->
+ </head>
+<body ng-app ng-controller="MyFilter">
+ Items List AngularJS
+<table border="1">
+<tr>
+  <td>id</td>
+  <td>autor</td>
+  <td>titulo</td>
+  <td>precio</td>
+  <td>fecha</td>
+</tr>  
+
+<tr ng-repeat="element in lista | filter:element.autor | orderBy:'autor'">
+<label>Search: <input ng-model="element.autor"></label>
+
+  <td>{{element.id}}</td>
+  <td>{{element.autor}}</td>
+  <td>{{element.titulo}}</td>
+  <td>{{element.price}}</td>
+  <td>{{element.fecha}}</td>
+</tr>
+ 
+</table>
+ <script> 
+       function MyFilter($scope,$http)
+  {           
+    	   $http.get('book/all')
+    	    .success(function (response){
+    	        $scope.lista = response;
+    	        console.log($scope.lista);
+    	    })
+    	    .error(function (response){
+    	        	        console.log(response); 
+    	  }); 
+
+	}
+  
+</script>
+</body>
+</html>
+</html>

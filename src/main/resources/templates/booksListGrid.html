@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+    <html ng-app="app">
+      <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular.js"></script>
+        <script src="http://ui-grid.info/release/ui-grid.js"></script>
+        <script type="application/javascript"  src="http://localhost:9999/book-grid-app"></script>
+		<!--script type="application/javascript"  src="resources/app.js"></script-->
+		<!--script type="text/javascript" th:src="@{/resources/static/js/book-grid-app.js}" defer></script-->
+       
+      </head>
+      <body>
+        Books List Grid
+        <br>
+        <br>
+        <div ng-controller="MainCtrl">
+        <div ui-grid="gridOptions" ui-grid-pagination></div>
+        </div>
+      </body>
+    </html>
