@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wsboot.entity.Book;
 import com.wsboot.entity.Item;
 import com.wsboot.entity.Persona;
+import com.wsboot.entity.Empleado;
 import com.wsboot.service.BookService;
 import com.wsboot.service.ItemService;
 import com.wsboot.service.PersonaService;
+import com.wsboot.service.EmpleadoService;
 
 @RestController
 public class MainRestController {
@@ -24,6 +26,9 @@ public class MainRestController {
 	
 	@Autowired
 	BookService bookService;	
+
+	@Autowired
+	EmpleadoService  empleadoService;	
 	
 	@GetMapping("/itemsList")
 	public List <Item>  getItemsList() {
@@ -46,4 +51,11 @@ public class MainRestController {
 		List <Book> booksList = bookService.getAllBooks();
 		return booksList;
 	}		
+
+	@GetMapping("/empleadosList")
+	public List <Empleado> findAllEmpleados() {
+		
+		List <Empleado> empleadosList = empleadoService.findAll();
+		return empleadosList;
+	}	
 }
