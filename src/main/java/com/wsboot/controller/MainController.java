@@ -58,6 +58,11 @@ public class MainController {
 	public String getItemsListGrid3() {
 		return "itemsListGrid3";
 	}
+
+	@GetMapping("/itemsTreeList3")
+	public String getItemsTreeList3() {
+		return "itemsTreeList3";
+	}
 	
 	@GetMapping("/testGrid")
 	public String testGrid() {
@@ -99,13 +104,21 @@ public class MainController {
 		return "itemsTreeList";
 	}
 	
-	@GetMapping("/itemsTreeList2")
+	@GetMapping("/itemsTreeList4")
+	//@RequestMapping(value = "/itemTreeList", method = RequestMethod.GET)
+	public ModelAndView getAllItemsTreeList4(Model model) {
+		List<Item> items = itemService.findAllByOrderById();
+		return new ModelAndView("itemsTreeList4","items", items);
+		
+	}		
+
+	@GetMapping("/itemTreeList")
 	//@RequestMapping(value = "/itemTreeList", method = RequestMethod.GET)
 	public ModelAndView getAllItemsTreeList2(Model model) {
 		List<Item> items = itemService.findAllByOrderById();
-		return new ModelAndView("itemsTreeList","items", items);
+		return new ModelAndView("itemTreeList2","items", items);
 		
-	}		
+	}	
 	
 	@GetMapping("/itemTableList")
 	//@RequestMapping(value = "/itemTreeList", method = RequestMethod.GET)

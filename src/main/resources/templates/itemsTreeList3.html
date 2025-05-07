@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="App">
+<head>    
+<title>Items Tree List 3</title>  
+  <!-- script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.js"></script-->
+ <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+ <script src="http://code.angularjs.org/1.2.16/angular.js"></script>
+ <script src="http://code.angularjs.org/1.2.16/angular-resource.js"></script>
+ <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+ <script>
+ window.App = angular.module('App', ['ui.bootstrap']);
+
+ App.controller('mainCtrl', ['$scope','$http', function($scope,$http) {
+
+ $http.get('itemsList')
+ .success(function (response){
+   $scope.objects = response;
+   console.log($scope.objects);
+   
+})
+
+ }]);
+ 
+ </script>
+ </head>
+ 
+ <body>
+ 
+ Item Tree List 3
+<div class="container-fluid">
+	<div ng-controller="mainCtrl">
+     
+		<table class="table table-striped table-hover table-bordered">
+
+		</tr>  
+		<tr ng-repeat="element in objects">
+		 <td>{{element.id}}</td>
+		 <td>{{element.name}}</td>
+		 <td>{{element.description}}</td>
+		 <td>{{element.price}}</td>
+		
+		</tr>
+		
+		</table>
+    </div>
+</div>        
+</body>
+</html>
