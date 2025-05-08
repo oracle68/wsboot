@@ -3,9 +3,33 @@
       <head>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular.js"></script>
         <script src="http://ui-grid.info/release/ui-grid.js"></script>
-        <script type="application/javascript"  src="http://localhost:9999/book-grid-app"></script>
+        <!-- script type="application/javascript"  src="http://localhost:9999/book-grid-app.js"></script-->
 		<!--script type="application/javascript"  src="resources/app.js"></script-->
-		<!--script type="text/javascript" th:src="@{/resources/static/js/book-grid-app.js}" defer></script-->
+		<script>
+
+        var app = angular.module('app', ['ui.grid', 'ui.grid.pagination']);
+        
+        app.controller('MainCtrl', ['$scope','$http', function ($scope,$http) {
+        $http
+        .get("book/all")
+        .then(function(response) {
+        $scope.data = response.data;
+        });
+       
+           $scope.gridOptions = {
+             data: 'data',
+             paginationPageSizes: [5, 10, 20,25],
+             paginationPageSize: 5,
+             columnDefs: [
+               {name: 'id'},
+               {name: 'autor'},
+               {name: 'titulo'},
+               {name: 'price'}
+             ]
+            }
+         }]);              
+        		
+		</script>
        
       </head>
       <body>
