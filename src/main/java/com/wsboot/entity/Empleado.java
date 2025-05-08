@@ -27,7 +27,8 @@ public class Empleado  implements java.io.Serializable {
 	@Column(name = "PROVINCIA", nullable = true, length = 50)		
 	private String provincia;	
 	
-
+	@Column(name = "FECHA", nullable = true, length = 10)		
+	private String fecha;	
 
 	public Integer getId()
 	{
@@ -90,6 +91,18 @@ public class Empleado  implements java.io.Serializable {
 	
 
 	
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public Empleado()
 	{
 	}
