@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" >
+
 <head>
 <meta charset="UTF-8">
 <title>Index</title>
-<script type="application/javascript"  src="resources/app.js"></script>
-<link href="resources/estilo.css"  rel="stylesheet"  type="text/css">
+<script type="application/javascript"  th:src="@{js/app.js}"></script>
+<link th:href="@{css/estilo.css}" rel="stylesheet"  type="text/css" media="all">
 </head>
 <body>
 <h1>Test javascript Spring</h1> <br>
 <p>Test2 javascript Spring</p> <br>
  <input type ="button" value ="Test" onclick="mensaje()"/>
+ <input type ="button" value ="List" onclick="window.open('/personasListAngular')"/>
 </body>
 </html>

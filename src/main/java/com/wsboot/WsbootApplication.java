@@ -21,9 +21,6 @@ public class WsbootApplication  {
 
 
     @Autowired(required = false)
-	//@Override
-	//@Autowired
-	//@Bean
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
         registry.setOrder(1);
