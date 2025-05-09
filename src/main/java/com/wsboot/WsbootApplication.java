@@ -1,5 +1,7 @@
 package com.wsboot;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,9 +16,10 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 @SpringBootApplication
 
-public class WsbootApplication {
+public class WsbootApplication  {
 
-	
+
+
     @Autowired(required = false)
 	//@Override
 	//@Autowired
@@ -26,7 +29,7 @@ public class WsbootApplication {
         registry.setOrder(1);
     }
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		/*ResourceHandlerRegistry registry;
 		 registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
 	     registry.setOrder(1);
@@ -43,9 +46,12 @@ public class WsbootApplication {
 
 	    Context context = new Context();
 	    String html = engine.process("index", context);
-	    System.out.println(html);		
+	    System.out.println(html);	
+	    	    
 		SpringApplication.run(WsbootApplication.class, args);
-
+		String url = "http://localhost:9999/personasListAngular";
+		openbrowser op = new openbrowser();
+		op.openbrowser(url);
 
 	}
 
