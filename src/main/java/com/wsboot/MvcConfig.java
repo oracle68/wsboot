@@ -1,9 +1,15 @@
 package com.wsboot;
 
+import java.io.IOException;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -41,4 +47,32 @@ public class MvcConfig implements WebMvcConfigurer {
         resolver.setCheckExistence(true);
         return resolver;
     }
+
+
+	public static void main(String[] args) throws IOException {
+  
+	    SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+	    resolver.setApplicationContext(new AnnotationConfigApplicationContext());
+	    resolver.setPrefix("classpath:/templates/");
+	    resolver.setSuffix(".html");
+	    resolver.setCharacterEncoding("UTF-8");
+	    resolver.setTemplateMode(TemplateMode.HTML);
+
+	    SpringTemplateEngine engine = new SpringTemplateEngine();
+	    engine.setTemplateResolver(resolver);
+
+	    Context context = new Context();
+	    String html = engine.process("index", context);
+	    System.out.println(html);	
+	    	    
+		SpringApplication.run(WsbootApplication.class, args);
+		String url = "http://localhost:9999/itemsListAngular";
+		openbrowser op = new openbrowser();
+		op.openbrowser(url);
+		
+		//System.exit(0);
+
+	}
+
+
 }
