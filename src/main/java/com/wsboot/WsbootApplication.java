@@ -46,7 +46,7 @@ public class WsbootApplication  {
 	    System.out.println(html);	
 	    	    
 		SpringApplication.run(WsbootApplication.class, args);
-		String url = "http://localhost:9999/personasListAngular";
+		String url = "http://localhost:9999/empleadosListAngular";
 		openbrowser op = new openbrowser();
 		op.openbrowser(url);
 

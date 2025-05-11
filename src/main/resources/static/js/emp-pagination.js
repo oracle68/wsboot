@@ -9,7 +9,7 @@
 
 
          
-         $scope.totalEmps= $scope.objects.length;
+         $scope.totalItems= $scope.objects.length;
          $scope.currentPage = 1;
          $scope.numPerPage = 5;
          
