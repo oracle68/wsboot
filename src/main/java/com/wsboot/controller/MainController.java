@@ -87,6 +87,14 @@ public class MainController {
 		return "personasListAngular";
 	}	
 
+	
+	
+	@GetMapping("/empleadosListAngular")
+	public String getEmpleadosList() {
+		
+		return "empleadosListAngular";
+	}
+	
 	@GetMapping("/personasListGrid")
 	public String getUsersGrid() {
 		
