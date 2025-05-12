@@ -40,9 +40,9 @@ public class MainController {
 	}
 	
 	
-	@GetMapping("/itemsListAngular")
-	public String getItemsListAngular() {
-		return "itemsListAngular";
+	@GetMapping("/itemsListAngularPDF")
+	public String getItemsListAngularPDF() {
+		return "itemsListAngularPDF";
 	}
 
 	@GetMapping("/itemsListGrid")
@@ -89,10 +89,10 @@ public class MainController {
 
 	
 	
-	@GetMapping("/empleadosListAngular")
+	@GetMapping("/empleadosListPDF")
 	public String getEmpleadosList() {
 		
-		return "empleadosListAngular";
+		return "empleadosListPDF";
 	}
 	
 	@GetMapping("/personasListGrid")

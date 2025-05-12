@@ -11,7 +11,7 @@
          
          $scope.totalItems= $scope.objects.length;
          $scope.currentPage = 1;
-         $scope.numPerPage = 5;
+         $scope.numPerPage = 15;
          
          $scope.paginate = function(value) {
            var begin, end, index;
@@ -20,6 +20,21 @@
            index = $scope.objects.indexOf(value);
            return (begin <= index && index < end);
          };
+         
+            $scope.export = function () {
+                html2canvas(document.getElementById('tabla'), {
+                    onrendered: function (canvas) {
+                        var data = canvas.toDataURL("image/png");
+                        var docDefinition = {
+                            content: [{
+                                image: data,
+                                width: 500
+                            }]
+                        };
+                        pdfMake.createPdf(docDefinition).download("document.pdf");
+                    }
+                });
+             }         
          
      })
      

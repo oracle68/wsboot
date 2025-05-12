@@ -46,7 +46,7 @@ public class WsbootApplication  {
 	   // System.out.println(html);	
 	    	    
 		SpringApplication.run(WsbootApplication.class, args);
-		String url = "http://localhost:9999/booksListPDF3";
+		String url = "http://localhost:9999/itemsListAngularPDF";
 		openbrowser op = new openbrowser();
 		op.openbrowser(url);
 
