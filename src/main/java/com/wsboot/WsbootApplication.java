@@ -42,11 +42,11 @@ public class WsbootApplication  {
 	    engine.setTemplateResolver(resolver);
 
 	    Context context = new Context();
-	    String html = engine.process("index", context);
-	    System.out.println(html);	
+	   // String html = engine.process("index", context);
+	   // System.out.println(html);	
 	    	    
 		SpringApplication.run(WsbootApplication.class, args);
-		String url = "http://localhost:9999/empleadosListAngular";
+		String url = "http://localhost:9999/booksListPDF3";
 		openbrowser op = new openbrowser();
 		op.openbrowser(url);
 

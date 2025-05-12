@@ -36,6 +36,6 @@
 
 		<mapping class="com.wsboot.entity.Persona" />
 
-
+		<mapping class="com.wsboot.entity.Empleado" />
 	</session-factory>
 </hibernate-configuration>

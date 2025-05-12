@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="App">
+<head>    
+<title>Item List PDF AngularJS</title>  
+  <!-- script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.js"></script-->
+ <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+ <script src="http://code.angularjs.org/1.2.16/angular.js"></script>
+ <script src="http://code.angularjs.org/1.2.16/angular-resource.js"></script>
+ <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+ <!-- script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script-->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+ 
+ <script>
+  window.App = angular.module("App", ['ui.bootstrap']);
+
+ App.controller('listController', ['$scope','$http', function($scope,$http) {
+	 $http.get('booksList')
+     .success(function (response){
+       $scope.lista = response;
+       console.log($scope.objects);
+  	 
+     $scope.export = function(){
+        html2canvas(document.getElementById('canvas'), {
+            onrendered: function (canvas) {
+                var data = canvas.toDataURL();
+                var docDefinition = {
+                    content: [{
+                        image: data,
+                        width: 500,
+                    }]
+                };
+                pdfMake.createPdf(docDefinition).download("c:/test.pdf");
+            }
+        });
+     }
+     })
+     
+ }]);
+ </script>  
+ 
+ </head>
+<body>
+ 
+ books List PDF AngularJS
+<div class="container-fluid">
+	<div ng-controller="listController">
+
+	
+      <canvas id="canvas"> 
+
+		<table class="table table-striped table-hover table-bordered">
+		<tr>
+		 <td>id</td>
+		 <td>autor</td>
+		 <td>titulo</td>
+		 <td>price</td>
+		
+		</tr>  
+		<tr ng-repeat="element in lista">
+		 <td>{{element.id}}</td>
+		 <td>{{element.autor}}</td>
+		 <td>{{element.titulo}}</td>
+		 <td>{{element.price}}</td>
+		
+		</tr>
+		</table>
+		</canvas>	
+ 
+	    <button ng-click="export()">export</button>
+	  </div>		
+
+    </div>
+</div>        
+  
+
+</body>
+</html>

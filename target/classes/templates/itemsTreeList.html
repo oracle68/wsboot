@@ -4,22 +4,25 @@
 <title>AngularJS Item List</title>  
   <!-- script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.js"></script-->
  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
- <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-tree/2.1.0/angular-ui-tree.min.css
+">
  <script src="http://code.angularjs.org/1.2.16/angular.js"></script>
  <script src="http://code.angularjs.org/1.2.16/angular-resource.js"></script>
  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
- <script type="text/javascript" src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-tree/2.1.0/angular-ui-tree.js
+"></script>
  
  <script>
-
-	window.App = angular.module('App', ['ui.bootstrap']);
-
+	
+	window.App = angular.module('App', ['ui.tree']);
+	
 	 App.controller('mainCtrl', ['$scope','$http', function($scope,$http) {
-
+   
 	 $http.get('itemsList')
 	 .success(function (response){
-			
-	   var myAppModule = angular.module('MyApp', ['ui.tree'])
+	   $scope.itemlist = response;	
+	   console.log($scope.itemlist);	   
+	 
 	   })
 
 	     }]);		  
@@ -31,18 +34,12 @@
  
  
  <div ui-tree>
-   <ol ui-tree-nodes="" ng-model="itemsList">
+   <ol ui-tree-nodes="" ng-model="itemlist">
      <li ng-repeat="item in itemslist" ui-tree-node>
        <div ui-tree-handle>
-         {{item.title}}
+         {{item.id}}
        </div>
-       <ol ui-tree-nodes="" ng-model="item.items">
-         <li ng-repeat="subItem in item.items" ui-tree-node>
-           <div ui-tree-handle>
-             {{subItem.title}}
-           </div>
-         </li>
-       </ol>
+
      </li>
    </ol>
  </div>

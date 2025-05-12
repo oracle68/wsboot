@@ -112,6 +112,22 @@ public class MainController {
 	public String getItemsTreeList() {
 		return "itemsTreeList";
 	}
+
+	@GetMapping("/itemsListPDF")
+	public String getItemsPDFList() {
+		return "itemsListPDF";
+	}
+		
+	@GetMapping("/booksListPDF")
+	public String getbooksListPDF() {
+		return "booksListPDF";
+	}
+	
+	@GetMapping("/booksListPDF3")
+	public String getbooksListPDF3() {
+		return "booksListPDF3";
+	}
+	
 	
 	@GetMapping("/itemsTreeList4")
 	//@RequestMapping(value = "/itemTreeList", method = RequestMethod.GET)
@@ -139,6 +155,15 @@ public class MainController {
 		model.addAttribute("items", itemService.findAllByOrderById());
 		return ("itemTableList");
 	}
-	
 
+	@GetMapping("/itemsListPDF2")
+	//@RequestMapping(value = "/itemTreeList", method = RequestMethod.GET)
+	public ModelAndView getAllItemsPDF(Model model) {
+		List<Item> items = itemService.findAllByOrderById();
+		return new ModelAndView("itemsListPDF2","items", items);
+		
+	}		
+	
+	
+	
 }

@@ -13,11 +13,13 @@
         <script src="http://ui-grid.info/docs/grunt-scripts/excel-builder.dist.js"></script>
         <script src="http://ui-grid.info//release/ui-grid.js"></script>
         <link rel="stylesheet" href="http://ui-grid.info//release/ui-grid.css" type="text/css">
-        <script src="resources/itemapp3.js"></script>
+        
       </head>
       <body>
         <div ng-controller="MainCtrl">
           <div ui-grid="gridOptions" ui-grid-selection ui-grid-exporter class="grid"></div>
         </div>
+        
+ <script th:src="@{/js/itemapp3.js}" type="text/javascript"></script>           
       </body>
     </html>
