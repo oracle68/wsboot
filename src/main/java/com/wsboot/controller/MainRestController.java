@@ -16,6 +16,8 @@ import com.wsboot.service.ItemService;
 import com.wsboot.service.PersonaService;
 import com.wsboot.service.EmpleadoService;
 
+import com.wsboot.util.WriteToFile;
+
 @CrossOrigin(origins = "http://localhost:9999")
 @RestController
 public class MainRestController {
@@ -36,6 +38,9 @@ public class MainRestController {
 	public List <Item>  getItemsList() {
 		
 		List <Item> itemsList = itemService.findAll(); 
+		WriteToFile w  = new WriteToFile();
+		w.escriuLista("C:/temp/itemsList.pdf", itemsList);
+				
 		return itemsList;
 	}
 	

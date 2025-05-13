@@ -123,6 +123,11 @@ public class MainController {
 		return "booksListPDF";
 	}
 	
+	@GetMapping("/booksListPDF2")
+	public String getbooksListPDF2() {
+		return "booksListPDF2";
+	}
+	
 	@GetMapping("/booksListPDF3")
 	public String getbooksListPDF3() {
 		return "booksListPDF3";

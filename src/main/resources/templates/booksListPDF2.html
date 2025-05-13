@@ -7,9 +7,7 @@
  <script src="http://code.angularjs.org/1.2.16/angular.js"></script>
  <script src="http://code.angularjs.org/1.2.16/angular-resource.js"></script>
  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
- <!-- script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script-->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
  
  <script>
   window.App = angular.module("App", ['ui.bootstrap']);
@@ -18,22 +16,18 @@
 	 $http.get('booksList')
      .success(function (response){
        $scope.lista = response;
-       console.log($scope.objects);
-  	 
-     $scope.export = function(){
-        html2canvas(document.getElementById('canvas'), {
-            onrendered: function (canvas) {
-                var data = canvas.toDataURL();
-                var docDefinition = {
-                    content: [{
-                        image: data,
-                        width: 500,
-                    }]
-                };
-                pdfMake.createPdf(docDefinition).download("c:/test.pdf");
-            }
-        });
-     }
+       console.log($scope.lista);
+       $scope.totalItems= $scope.lista.length;
+       $scope.currentPage = 1;
+       $scope.numPerPage = 10;
+       
+       $scope.paginate = function(value) {
+           var begin, end, index;
+           begin = ($scope.currentPage - 1) * $scope.numPerPage;
+           end = begin + $scope.numPerPage;
+           index = $scope.lista.indexOf(value);
+           return (begin <= index && index < end);
+         };
      })
      
  }]);
@@ -47,9 +41,8 @@
 	<div ng-controller="listController">
 
 	
-      <canvas id="canvas"> 
 
-		<table class="table table-striped table-hover table-bordered">
+		<table id="tabla" class="table table-striped table-hover table-bordered">
 		<tr>
 		 <td>id</td>
 		 <td>autor</td>
@@ -57,7 +50,7 @@
 		 <td>price</td>
 		
 		</tr>  
-		<tr ng-repeat="element in lista">
+		<tr ng-repeat="element in lista | filter : paginate">
 		 <td>{{element.id}}</td>
 		 <td>{{element.autor}}</td>
 		 <td>{{element.titulo}}</td>
@@ -65,14 +58,75 @@
 		
 		</tr>
 		</table>
-		</canvas>	
- 
-	    <button ng-click="export()">export</button>
+		<pagination total-items="totalItems" ng-model="currentPage"
+		    max-size="5" boundary-links="true"
+		    items-per-page="numPerPage" class="pagination-sm">
+		</pagination>
+		<br> 
+	    
+        <button onclick="printPdf()">print</button>	    
 	  </div>		
 
     </div>
 </div>        
   
+       <script async>
+            function printPdf() {
+                myTable = document.getElementsByTagName("table")[0];
+                //myTable = document.getElementById("tabla");
+                myClone = myTable.cloneNode(true);
+                myCloneouterHTML = myClone.outerHTML;
+                //document.body.appendChild(myClone);
+                
+            	// newWindow object can only be created by window.open()
+                // in an event listener.
+                // If we call it elsewhere, null will be returned
+                const newWindow = window.open("", "_blank", "width=800,height=600");
 
+
+            	
+
+           	// creating a new html node
+                const html = document.createElement("html");
+
+                // cloneNode(true) will perform a deep clone 
+                const head = document.head.cloneNode(true);
+
+                // creating a new body element for our newWindow
+                const body = document.createElement("body");
+
+
+
+                
+                
+                html.appendChild(head);
+                html.appendChild(body);
+
+
+                //html.appendChild(myClone);
+
+                //newDiv =  newWindow.document.createElement("div");
+        	    //newDiv.setAttribute("id", "newTable");
+        	                    	  
+        	  //newWindow.document.appendChild(myClone);
+            //newWindow.document.write("Hello");
+                // write content to the new window's document.
+                //newWindow.document.write(html.innerHTML);
+                newWindow.document.write(myCloneouterHTML);
+                newWindow.document.write("<br>");
+               // newWindow.document.write(myClone);
+        	    //newWindow.newDiv.innerHTML = myCloneinnerHTML;   
+                // close document to stop writing
+                // otherwise new window may hang
+                newWindow.document.close();
+                
+                // print content in new window as PDF
+                newWindow.print();
+
+                // close the new window after printing
+                newWindow.close();
+               
+            }
+        </script>
 </body>
 </html>
