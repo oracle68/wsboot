@@ -87,6 +87,11 @@ public class MainController {
 		return "personasListAngular";
 	}	
 
+	@GetMapping("/LobsListAngular")
+	public String getLobsListAngular() {
+		
+		return "LobsListAngular";
+	}	
 	
 	
 	@GetMapping("/empleadosListPDF")

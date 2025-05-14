@@ -8,32 +8,38 @@
 <table border="1">
 <tr>
   <td>id</td>
-  <td>autor</td>
-  <td>titulo</td>
-  <td>precio</td>
-  <td>fecha</td>
+  <td>doc</td>
 </tr>  
 
-<tr ng-repeat="element in lista | filter:element.id | orderBy:'id'">
-<label>Search: <input ng-model="element.autor"></label>
+<tr ng-repeat="e in lista | filter:e.id | orderBy:'id'">
+<label>Search: <input ng-model="e.id"></label>
 
-  <td>{{element.id}}</td>
-  <td>{{element.doc}}</td>
-
+  <td>{{e.id}}</td>
+  <td>
+<img ng-src="data:image/JPEG;base64,{{e.dataBlob}}">
+  
+  </td>  
 </tr>
  
 </table>
  <script> 
        function MyFilter($scope,$http)
-  {           
-    	   $http.get('/book/all')
+  {       
+    	   var blob = {
+    			      responseType: 'blob'
+    			  };    	   
+    	   $http.get('LobsList')
     	    .success(function (response){
-    	        $scope.lista = response;
-    	        console.log($scope.lista);
+    	    	 $scope.lista = response;
+    	    	 console.log($scope.lista);
+
+
     	    })
     	    .error(function (response){
     	        	        console.log(response); 
     	  }); 
+    	   
+  
 
 	}
   

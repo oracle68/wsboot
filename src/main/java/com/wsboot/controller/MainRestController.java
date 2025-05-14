@@ -11,10 +11,12 @@ import com.wsboot.entity.Book;
 import com.wsboot.entity.Item;
 import com.wsboot.entity.Persona;
 import com.wsboot.entity.Empleado;
+import com.wsboot.entity.LobTable;
 import com.wsboot.service.BookService;
 import com.wsboot.service.ItemService;
 import com.wsboot.service.PersonaService;
 import com.wsboot.service.EmpleadoService;
+import com.wsboot.service.LobTableService;
 
 import com.wsboot.util.WriteToFile;
 
@@ -33,6 +35,9 @@ public class MainRestController {
 
 	@Autowired
 	EmpleadoService  empleadoService;	
+
+	@Autowired
+	LobTableService  lobTableService;	
 	
 	@GetMapping("/itemsList")
 	public List <Item>  getItemsList() {
@@ -51,6 +56,14 @@ public class MainRestController {
 		List <Persona> usersList = userService.findAll(); 
 		return usersList;
 	}	
+	
+	
+	@GetMapping("/LobsList")
+	public List <LobTable> getLobsList() {
+		
+		List <LobTable> lobsList = lobTableService.findAllLobs(); 
+		return lobsList;
+	}		
 	
 	@GetMapping("/booksList")
 	public List <Book> getBooksList() {
