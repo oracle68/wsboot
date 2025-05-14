@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html><head>    <title>AngularJS PDFsList</title>  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.js"></script>  
+  <!-- script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-resource.js"></script-->
+ </head>
+<body ng-app ng-controller="MyFilter">
+PDFs List AngularJS
+<table border="1">
+<tr>
+  <td>id</td>
+  <td>pdfdoc</td>
+</tr>  
+
+<tr ng-repeat="e in lista">
+
+  <td>{{e.id}}</td>
+
+</td>
+<td> <button onclick="verPDF($scope.lista.id)";>Show PDF</button>
+ </td>
+
+
+<!-- td id="pdf"  style="visibility:hidden"> {{e.dataBlob}} </td--> 
+
+
+<!-- td>
+<embed ng-src="{{contentPDF}}" type="application/pdf" class="col-xs-12" style="height:400px; text-align:center;" />
+
+<td><img ng-src="{{contentPDF}}" style="height: 400px; width: 400px" /><br /><br /></td-->
+
+
+</tr>
+
+ 
+</table>
+<a></a>
+<script>
+function verPDF(valor){
+	 window.open('/temp/outfile_'+valor+'.pdf');
+	 }
+
+</script>
+
+ <script> 
+       function MyFilter($scope,$http,$sce)
+  {       
+    	   $http.get('PdfsList')
+    	    .success(function (response){
+    	    	 $scope.lista = response;
+    	    	  
+    	    	 console.log($scope.lista);
+    	    	 var blob = $scope.lista.dataBlob;
+    	    	 var i = $scope.lista.i;
+    	    	 var filename = "output_"+i+".pdf";
+    	    	 
+    				 //var blob = new window.Blob([data], { type: 'application/pdf' });
+    				 var file = new Blob([(blob)], {type: 'application/pdf'});
+    			     var fileURL = URL.createObjectURL(file);
+    			     $scope.contentPDF = $sce.trustAsResourceUrl(fileURL);			 
+    			     window.open(fileURL);
+
+    			     
+
+    	    })
+    	    .error(function (response){
+    	        	        console.log(response); 
+    	  }); 
+  
+
+	}
+  
+</script>
+
+
+       <script async>
+            function verPDF(valor) {
+            	window.open(valor);
+            	var file = new Blob([valor], {type: 'application/pdf'});
+                var fileURL = window.URL.createObjectURL(file);
+                window.open(fileURL);
+/*                
+            	myTable = document.getElementById("pdf");
+                //myTable = document.getElementById("tabla");
+                myClone = myTable.cloneNode(true);
+                myCloneouterHTML = myClone.outerHTML;
+                //document.body.appendChild(myClone);
+                
+            	// newWindow object can only be created by window.open()
+                // in an event listener.
+                // If we call it elsewhere, null will be returned
+                const newWindow = window.open("", "_blank", "width=800,height=600");
+
+
+            	
+
+           	// creating a new html node
+                const html = document.createElement("html");
+
+                // cloneNode(true) will perform a deep clone 
+                const head = document.head.cloneNode(true);
+
+                // creating a new body element for our newWindow
+                const body = document.createElement("body");
+
+
+
+                
+                
+                html.appendChild(head);
+                html.appendChild(body);
+
+
+                //html.appendChild(myClone);
+
+                //newDiv =  newWindow.document.createElement("div");
+        	    //newDiv.setAttribute("id", "newTable");
+        	                    	  
+        	  //newWindow.document.appendChild(myClone);
+            //newWindow.document.write("Hello");
+                // write content to the new window's document.
+                //newWindow.document.write(html.innerHTML);
+                newWindow.document.write(myCloneouterHTML);
+                newWindow.document.write("<br>");
+               // newWindow.document.write(myClone);
+        	    //newWindow.newDiv.innerHTML = myCloneinnerHTML;   
+                // close document to stop writing
+                // otherwise new window may hang
+                newWindow.document.close();
+                
+                // print content in new window as PDF
+                newWindow.print();
+
+                // close the new window after printing
+                newWindow.close();
+  */             
+            }
+        </script>
+</body>
+</html>
+</html>

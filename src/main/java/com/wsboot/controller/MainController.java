@@ -94,6 +94,13 @@ public class MainController {
 	}	
 	
 	
+	@GetMapping("/PdfsListAngular")
+	public String getPdfsListAngular() {
+		
+		return "PdfsListAngular";
+	}	
+	
+	
 	@GetMapping("/empleadosListPDF")
 	public String getEmpleadosList() {
 		

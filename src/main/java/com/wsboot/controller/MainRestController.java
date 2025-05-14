@@ -1,5 +1,9 @@
 package com.wsboot.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +16,14 @@ import com.wsboot.entity.Item;
 import com.wsboot.entity.Persona;
 import com.wsboot.entity.Empleado;
 import com.wsboot.entity.LobTable;
+import com.wsboot.entity.PdfTable;
+
 import com.wsboot.service.BookService;
 import com.wsboot.service.ItemService;
 import com.wsboot.service.PersonaService;
 import com.wsboot.service.EmpleadoService;
 import com.wsboot.service.LobTableService;
+import com.wsboot.service.PdfTableService;
 
 import com.wsboot.util.WriteToFile;
 
@@ -38,6 +45,9 @@ public class MainRestController {
 
 	@Autowired
 	LobTableService  lobTableService;	
+
+	@Autowired
+	PdfTableService  pdfTableService;	
 	
 	@GetMapping("/itemsList")
 	public List <Item>  getItemsList() {
@@ -64,6 +74,22 @@ public class MainRestController {
 		List <LobTable> lobsList = lobTableService.findAllLobs(); 
 		return lobsList;
 	}		
+	
+	@GetMapping("/PdfsList")
+	public List <PdfTable> getPdfsList() throws IOException {
+		
+		List <PdfTable> pdfsList = pdfTableService.findAllPdfs(); 
+		
+		
+	    for (int i = 0; i < pdfsList.size(); i++) {
+	    	OutputStream outfile = new FileOutputStream("c:/temp/outfile_"+i+".pdf");	    	
+	        outfile.write(pdfsList.get(i).getDataBlob());      
+	        outfile.close();
+	    }
+		
+		
+		return pdfsList;
+	}	
 	
 	@GetMapping("/booksList")
 	public List <Book> getBooksList() {
