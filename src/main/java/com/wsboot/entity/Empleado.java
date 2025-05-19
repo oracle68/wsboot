@@ -5,6 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.sql.Date;
+
 import javax.persistence.Column;
 
 @Entity
@@ -27,8 +32,9 @@ public class Empleado  implements java.io.Serializable {
 	@Column(name = "PROVINCIA", nullable = true, length = 50)		
 	private String provincia;	
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")	
 	@Column(name = "FECHA", nullable = true, length = 10)		
-	private String fecha;	
+	private Date fecha;	
 
 	public Integer getId()
 	{
@@ -91,11 +97,11 @@ public class Empleado  implements java.io.Serializable {
 	
 
 	
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
