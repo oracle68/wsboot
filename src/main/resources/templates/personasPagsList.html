@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>    
+<title>Persona List Pagination</title>  
+ </head>
+<body>
+ 
+ Persona List Pagination
+
+
+
+		<table id="tabla" border="1">
+		<tr>
+		 <td>id</td>
+		 <td>name</td>
+		
+		</tr>  
+		<tr th:each="e:${pList}">
+         <td th:text="${e.id}"></td>
+         <td th:text="${e.name}"></td>
+		</tr>
+		
+		</table>
+
+<th:block> 
+<tr th:each="s : ${pList}">
+    <td th:text="${s.id}" />
+    <td th:text="${s.name}" />
+</tr>
+
+</th:block>
+
+</body>
+</html>
+
