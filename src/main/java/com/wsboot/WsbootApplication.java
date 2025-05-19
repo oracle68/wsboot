@@ -50,7 +50,7 @@ public class WsbootApplication  {
 		//openbrowser op = new openbrowser();
 		//op.openbrowser(url);
 		
-		String url2 = "http://localhost:9999/empleadosOrderByProvincia";
+		String url2 = "http://localhost:9999/empleadosListTable";
 		openbrowser op2 = new openbrowser();
 		op2.openbrowser(url2);		
 
