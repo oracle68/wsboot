@@ -19,6 +19,10 @@ public class EmpleadoService {
     public List<Empleado> findAll() {
         return this.eDao.findAll();
     }
+
+    public List<Empleado> empOrderByProvincia() {
+        return this.eDao.empOrderByProvincia();
+    }
     
     public Page<Empleado> paginas(Pageable pageable){
         return eDao.findAll(pageable);

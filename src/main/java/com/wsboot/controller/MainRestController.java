@@ -104,4 +104,12 @@ public class MainRestController {
 		List <Empleado> empleadosList = empleadoService.findAll();
 		return empleadosList;
 	}	
+	
+	
+	@GetMapping("/empOrderByProvincia")
+	public List <Empleado> empOrderByProvincia() {
+		
+		List <Empleado> empleadosList = empleadoService.empOrderByProvincia();
+		return empleadosList;
+	}	
 }

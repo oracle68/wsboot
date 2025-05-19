@@ -107,6 +107,13 @@ public class MainController {
 		return "empleadosListPDF";
 	}
 	
+	@GetMapping("/empleadosOrderByProvincia")
+	public String getempleadosOrderByProvincia() {
+		
+		return "empleadosOrderByProvincia";
+	}	
+	
+	
 	@GetMapping("/personasListGrid")
 	public String getUsersGrid() {
 		

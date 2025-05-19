@@ -9,8 +9,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import org.thymeleaf.context.Context;
-import org.thymeleaf.spring6.SpringTemplateEngine;
-import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
 
@@ -50,7 +50,7 @@ public class WsbootApplication  {
 		//openbrowser op = new openbrowser();
 		//op.openbrowser(url);
 		
-		String url2 = "http://localhost:9999/PdfsListAngular";
+		String url2 = "http://localhost:9999/empleadosOrderByProvincia";
 		openbrowser op2 = new openbrowser();
 		op2.openbrowser(url2);		
 

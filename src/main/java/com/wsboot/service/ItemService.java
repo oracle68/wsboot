@@ -2,7 +2,7 @@ package com.wsboot.service;
 
 import java.util.List;
 
-import org.hibernate.query.SortDirection;
+//import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
 import org.springframework.data.domain.Example;
