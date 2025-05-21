@@ -6,5 +6,8 @@ import com.wsboot.entity.Persona;
 
 public interface PersonaRepository extends JpaRepository<Persona, Integer>
 {
+	
+
+
 
 }

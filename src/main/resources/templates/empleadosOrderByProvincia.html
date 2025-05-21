@@ -44,7 +44,9 @@ Empleados List Angular
 		    items-per-page="numPerPage" class="pagination-sm">
 		</pagination>
 		<br>
-        <input type="button" value="Export" ng-click="export()" />		
+        <input type="button" value="Export" ng-click="export()" />	
+        <input type="button" value="getListToPdf" ng-click="getpdf()" />	
+        <input type="button" value="putListToPdf" ng-click="getpdf2()" />
     </div>
 </div>        
   <script>
@@ -84,8 +86,38 @@ Empleados List Angular
                    pdfMake.createPdf(docDefinition).download("document.pdf");
                }
            });
-        }         
-    
+        }
+       
+
+  	 $scope.getpdf = function () { 
+  	   //var data = { lista : $scope.objects}
+  	   var data = { lista : $scope.objects}
+  	   $http.get("/getpdf").then(function (response) {
+  		   if (response)
+  				console.log("Post Data Submitted Successfully!");
+        //$window.location.reload();
+			}, function (response) {
+			$scope.msg = "Service not Exists";
+			$scope.statusval = response.status;
+			$scope.statustext = response.statusText;
+			$scope.headers = response.headers();
+			});
+
+		};
+       
+       
+	  	 $scope.getpdf2 = function () { 
+	    	   var data = {lista2: $scope.objects}
+	    	   console.log("Post Data ...");
+	    	   $http.post("/getpdf", data).then(function mySuccess(response) {
+	               $scope.myWelcome = response.data;
+	               alert("OK "+$scope.myWelcome);
+	           }, function myError(response) {
+	               $scope.myWelcome = response.statusText;
+	               alert("error "+$scope.myWelcome);
+	           });
+	  	}
+	  		
 })
 
   }]);

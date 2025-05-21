@@ -1,15 +1,30 @@
 package com.wsboot.controller;
 
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
-
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.wsboot.entity.Book;
 import com.wsboot.entity.Item;
@@ -27,7 +42,7 @@ import com.wsboot.service.PdfTableService;
 
 import com.wsboot.util.WriteToFile;
 
-@CrossOrigin(origins = "http://localhost:9999")
+@CrossOrigin(origins = "http://localhost:9999/")
 @RestController
 public class MainRestController {
 
@@ -112,4 +127,80 @@ public class MainRestController {
 		List <Empleado> empleadosList = empleadoService.empOrderByProvincia();
 		return empleadosList;
 	}	
+
+	
+	@RequestMapping(value="/getpdf", method=RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	//public ResponseEntity<byte[]> getPDF(@RequestBody java.util.List lista) {
+	//public String getPDF(@RequestBody java.util.List<Empleado> lista2) {
+	public String getPDF(@RequestBody Collection <Empleado> lista2) {
+	    // convert JSON to Employee 
+		String filename = "c:/temp/lista.pdf";
+		System.out.println("begin");
+		//java.util.List lista2 = lista; //new ArrayList<>();
+		
+		 try {
+		      FileWriter myWriter = new FileWriter(filename);
+		      for (int i = 0; i < lista2.size(); i++) {
+		    	  myWriter.write(((HttpHeaders) lista2).get(i).toString()+"\n"); //  System.out.println(names.get(i));
+		    	}		      
+		      
+		      myWriter.close();
+		      //System.out.println("Successfully wrote to the file.");
+		    } catch (IOException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    }
+	    // retrieve contents of "C:/tmp/report.pdf" that were written in showHelp
+	  /*  byte[] contents  =  (byte[]) lista2;
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_PDF);
+	    // Here you have to set the actual filename of your pdf
+	   // String filename = "/temp/_output.pdf";
+	    headers.setContentDispositionFormData(filename, filename);
+	    headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+	    ResponseEntity<byte[]> response = new ResponseEntity<>(contents, headers, HttpStatus.OK);
+	    */
+	    return  "OK!";
+	}
+	
+	@PostMapping("/putListToPdf")
+	public void putListToPdf(@PathVariable java.util.List lista)  {
+		
+		String filename = "c:/temp/lista.pdf";
+		System.out.println("1lista.size() "+lista.size());
+	try {
+		System.out.println("2lista.size() "+lista.size());		
+		WriteToFile wtf = new WriteToFile();
+		wtf.escriuLista(filename,lista);
+		System.out.println("end ");
+		//return new ModelAndView("personasPagsList","pList", pList);
+	   }catch(Exception e){
+           System.out.println(e.getMessage());
+           e.printStackTrace();            
+       }	
+	System.out.println("OK");		
+	}	
+	
+	@GetMapping("/ListToPdf") //, produces = {"text/plain", "application/*"}))
+	
+	//public void ListToPdf(@RequestParam("filename") String filename,
+    //        @RequestParam("lista") java.util.List lista)  {
+	public void getListToPdf(@PathVariable java.util.List lista)  {
+			
+		String filename = "c:/temp/lista.pdf";
+		System.out.println("1lista.size() "+lista.size());
+	try {
+		System.out.println("2lista.size() "+lista.size());		
+		WriteToFile wtf = new WriteToFile();
+		wtf.escriuLista(filename,lista);
+		System.out.println("end ");
+		//return new ModelAndView("personasPagsList","pList", pList);
+	   }catch(Exception e){
+           System.out.println(e.getMessage());
+           e.printStackTrace();            
+       }	
+	System.out.println("OK");		
+	}		
 }
