@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html><head>    <title>AngularJS ItemsList</title>  
+<html><head>    <title>AngularJS LobsList</title>  
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.js"></script>  
   <!-- script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-resource.js"></script-->
  </head>
 <body ng-app ng-controller="MyFilter">
- Items List AngularJS
+ Lobs List AngularJS
 <table border="1">
 <tr>
   <td>id</td>
@@ -14,21 +14,19 @@
   <td>fecha</td>
 </tr>  
 
-<tr ng-repeat="element in lista | filter:element.autor | orderBy:'autor'">
+<tr ng-repeat="element in lista | filter:element.id | orderBy:'id'">
 <label>Search: <input ng-model="element.autor"></label>
 
   <td>{{element.id}}</td>
-  <td>{{element.autor}}</td>
-  <td>{{element.titulo}}</td>
-  <td>{{element.price}}</td>
-  <td>{{element.fecha}}</td>
+  <td>{{element.doc}}</td>
+
 </tr>
  
 </table>
  <script> 
        function MyFilter($scope,$http)
   {           
-    	   $http.get('book/all')
+    	   $http.get('/book/all')
     	    .success(function (response){
     	        $scope.lista = response;
     	        console.log($scope.lista);
