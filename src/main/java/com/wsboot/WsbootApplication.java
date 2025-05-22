@@ -46,7 +46,7 @@ public class WsbootApplication  {
 	   // System.out.println(html);	
 	    	    
 		SpringApplication.run(WsbootApplication.class, args);
-		String url = "http://localhost:9999/EmpsListToJSON";
+		String url = "http://localhost:9999/CreaProvincia?nomProvincia=Alacant";
 		openbrowser op = new openbrowser();
 		op.openbrowser(url);
 		
