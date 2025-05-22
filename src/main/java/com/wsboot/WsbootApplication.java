@@ -46,7 +46,9 @@ public class WsbootApplication  {
 	   // System.out.println(html);	
 	    	    
 		SpringApplication.run(WsbootApplication.class, args);
-		String url = "http://localhost:9999/CreaProvincia?nomProvincia=Alacant";
+		//String url = "http://localhost:9999/CreaProvincia?nomProvincia=Alacant";
+		String url = "http://localhost:9999/execSql?sql=SELECT * FROM V$VERSION";
+		
 		openbrowser op = new openbrowser();
 		op.openbrowser(url);
 		

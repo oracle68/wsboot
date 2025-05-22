@@ -79,6 +79,51 @@ public class ProvinciaController {
 		
 	}	
 
+	@RequestMapping(value = "/execSql", method = RequestMethod.GET)
+	public  @ResponseBody HttpStatus UserBd(@RequestParam String sql,HttpServletRequest request, 
+	        HttpServletResponse response) throws Exception {
+		try {
+			
+		   // @Query(nativeQuery = true, value = "SELECT INSERT_PROVINCIA(:text) FROM dual");
+		   // String callFunction(@Param("text") String text);	
+			//provService.callInsertProvincia("Valencia");
+			//provService.callFuncInsertProvincia("Alacant");
+			
+			
+			//List<String[]> q =  entityManager
+			List<Object[]> query =  entityManager
+				    .createNativeQuery(sql
+				    )
+				    //.setParameter("provname", "Alacant")
+				   // .getSingleResult();
+				    .getResultList();
+			for (Object[] result: query)
+			{	
+			System.out.println(result[0]);
+			}
+			
+/*
+	
+Query q = em.createNativeQuery("SELECT a.firstname, a.lastname FROM Author a WHERE a.id = ?");
+q.setParameter(1, 1);
+Object[] author = (Object[]) q.getSingleResult();
+ 
+System.out.println("Author "
+        + author[0]
+        + " "
+        + author[1]); 
+ */
+        
+		} catch (Exception e) {
+			System.out.println(e);
+		    return HttpStatus.BAD_REQUEST; //throw new Exception(e);
+		    
+		}	    
+		
+		return HttpStatus.OK;
+		
+	}	
+	
 	@RequestMapping(value = "/CreaProvincia", method = RequestMethod.GET)
 	public  @ResponseBody HttpStatus CreaProvincia(@RequestParam String nomProvincia, HttpServletRequest request, 
 	        HttpServletResponse response) throws Exception {
