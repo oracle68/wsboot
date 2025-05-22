@@ -46,13 +46,13 @@ public class WsbootApplication  {
 	   // System.out.println(html);	
 	    	    
 		SpringApplication.run(WsbootApplication.class, args);
-		//String url = "http://localhost:9999/LobsListAngular";
-		//openbrowser op = new openbrowser();
-		//op.openbrowser(url);
+		String url = "http://localhost:9999/EmpsListToJSON";
+		openbrowser op = new openbrowser();
+		op.openbrowser(url);
 		
-		String url2 = "http://localhost:9999/productsListPDF";
-		openbrowser op2 = new openbrowser();
-		op2.openbrowser(url2);		
+		//String url2 = "http://localhost:9999/EmpsListToXML";
+		//openbrowser op2 = new openbrowser();
+		//op2.openbrowser(url2);		
 
 	}
 

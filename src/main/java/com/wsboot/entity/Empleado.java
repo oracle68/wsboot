@@ -113,11 +113,22 @@ public class Empleado  implements java.io.Serializable {
 	{
 	}
 
-
+	public Empleado(Integer id,String name,String gender,String adress,String city,String provincia)
+	{
+		this.id = id;
+		this.name = name;
+		this.gender = gender;
+		this.adress = adress;
+		this.city = city;
+		this.provincia = provincia;
+		
+	}
+	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "Emp [ provincia=" + provincia + " ,  id=" + id + ", name=" + name + ", gender=" + gender + ", adress=" + adress +
+				", city=" + city + ", fecha=" + fecha 
+				+ "]";
 	}
 
 }
