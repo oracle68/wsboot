@@ -24,8 +24,12 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,7 +51,28 @@ public class SqlController {
     
     @Autowired
     EntityManager entityManager;
-    
+ 
+
+	private String clobToString(java.sql.Clob data) {
+	    StringBuilder sb = new StringBuilder();
+	    try {
+	        Reader reader = data.getCharacterStream();
+	        BufferedReader br = new BufferedReader(reader);
+
+	        String line;
+	        while(null != (line = br.readLine())) {
+	            sb.append(line);
+	        }
+	        br.close();
+	    } catch (SQLException e) {
+	        // handle this exception
+	    } catch (IOException e) {
+	        // handle this exception
+	    }
+	    return sb.toString();
+	}
+	
+	
 	@RequestMapping(value = "/execSql", method = RequestMethod.GET)
 	public  @ResponseBody void ExecSqlCommand(@RequestParam String sql,HttpServletRequest request, 
 	        HttpServletResponse response) throws Exception {
@@ -97,5 +122,30 @@ System.out.println("Author "
 		
 	}	
 	
-    	
+
+	@RequestMapping(value = "/execSqlTable", method = RequestMethod.GET)
+	public  @ResponseBody void ExecSqlTableCommand(@RequestParam String table,HttpServletRequest request, 
+	        HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+
+		try {
+
+			
+			java.sql.Clob q = (java.sql.Clob) entityManager
+				    .createNativeQuery(
+				        "SELECT tabletoxml(:tabla) FROM DUAL"
+				    )
+				    .setParameter("tabla", table)
+				    .getSingleResult();			
+
+		
+		response.setContentType("text/xml");
+		out.println(clobToString(q));
+        
+		} catch (Exception e) {
+			System.out.println(e);
+		}	    
+
+		
+	}	
 }
