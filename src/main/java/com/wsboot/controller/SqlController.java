@@ -41,6 +41,7 @@ import com.wsboot.service.ItemService;
 
 import com.wsboot.entity.Provincia;
 import com.wsboot.service.ProvinciaService;
+import com.wsboot.util.ClobToString;
 
 
 
@@ -53,25 +54,7 @@ public class SqlController {
     EntityManager entityManager;
  
 
-	private String clobToString(java.sql.Clob data) {
-	    StringBuilder sb = new StringBuilder();
-	    try {
-	        Reader reader = data.getCharacterStream();
-	        BufferedReader br = new BufferedReader(reader);
 
-	        String line;
-	        while(null != (line = br.readLine())) {
-	            sb.append(line);
-	        }
-	        br.close();
-	    } catch (SQLException e) {
-	        // handle this exception
-	    } catch (IOException e) {
-	        // handle this exception
-	    }
-	    return sb.toString();
-	}
-	
 	
 	@RequestMapping(value = "/execSql", method = RequestMethod.GET)
 	public  @ResponseBody void ExecSqlCommand(@RequestParam String sql,HttpServletRequest request, 
@@ -138,9 +121,9 @@ System.out.println("Author "
 				    .setParameter("tabla", table)
 				    .getSingleResult();			
 
-		
+		ClobToString cts = new ClobToString();
 		response.setContentType("text/xml");
-		out.println(clobToString(q));
+		out.println(cts.clobToString(q));
         
 		} catch (Exception e) {
 			System.out.println(e);
