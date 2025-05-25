@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 //import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,8 +43,9 @@ import com.wsboot.service.ItemService;
 import com.wsboot.entity.Provincia;
 import com.wsboot.service.ProvinciaService;
 import com.wsboot.util.ClobToString;
+import com.wsboot.util.ColumnNames;
 
-
+import org.hibernate.SessionFactory;
 
 @CrossOrigin(origins = "http://localhost:9999")
 @Controller
@@ -107,6 +109,7 @@ System.out.println("Author "
 	
 
 	@RequestMapping(value = "/execSqlTable", method = RequestMethod.GET)
+	@Transactional
 	public  @ResponseBody void ExecSqlTableCommand(@RequestParam String table,HttpServletRequest request, 
 	        HttpServletResponse response) throws Exception {
 		PrintWriter out = response.getWriter();
@@ -124,7 +127,15 @@ System.out.println("Author "
 		ClobToString cts = new ClobToString();
 		response.setContentType("text/xml");
 		out.println(cts.clobToString(q));
-        
+
+		//entityManager.getTransaction().begin();
+		
+		//SessionFactory sessionFactory = entityManager.unwrap(SessionFactory.class);
+		
+		//ColumnNames cn = new ColumnNames();
+		//cn.columnNames(sessionFactory,"Empleados");		
+		//entityManager.getTransaction().commit();
+		
 		} catch (Exception e) {
 			System.out.println(e);
 		}	    

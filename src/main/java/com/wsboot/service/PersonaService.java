@@ -22,6 +22,21 @@ public class PersonaService {
         return this.personaDao.findAll();
     }
     
+    public void Add(Persona p) {
+        personaDao.save(p);
+    }    
+
+    
+    public void Update(Persona p) {
+        personaDao.save(p);
+    }       
+
+   // public void Merge(Persona p) {
+   //     personaDao.merge(p);
+   // }       
+    
+    
+    
     public Page<Persona> paginas(Pageable pageable){
         return personaDao.findAll(pageable);
     }  

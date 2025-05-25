@@ -2,6 +2,8 @@ package com.wsboot.controller;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
@@ -27,7 +29,10 @@ public class PersonaController {
     @Autowired
     PersonaService personaService;
  
-	@GetMapping("/personasPagList")
+    @Autowired
+    EntityManager entityManager;
+    
+    @GetMapping("/personasPagList")
 	public String personasPagList(Model model,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
@@ -55,6 +60,29 @@ public class PersonaController {
 	public ModelAndView getempleadosListTable(Model model) {
 		List<Persona> pList = personaService.findAll();
 		return new ModelAndView("personasPagsList","pList", pList);
+		
+	}	
+	
+	@GetMapping("/insertPersonas")
+	public ModelAndView InsertPersonas(Model model) {
+		
+		Persona p = new Persona();
+		p.setName("John Nike");
+		personaService.Add(p);
+		List<Persona> pList = personaService.findAll();
+		return new ModelAndView("personasListAngular","pList", pList);
+		
+	}		
+
+	@GetMapping("/updatePersonas")
+	public ModelAndView UpdatePersonas(Model model) {
+		
+		Persona p = new Persona();
+		p.setId(1023); 
+		p.setName("Otra persona");
+		personaService.Add(p);
+		List<Persona> pList = personaService.findAll();
+		return new ModelAndView("personasListAngular","pList", pList);
 		
 	}	
 	

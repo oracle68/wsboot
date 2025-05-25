@@ -13,6 +13,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
+import com.wsboot.util.ColumnNames;
+
 
 @SpringBootApplication
 
@@ -46,11 +48,13 @@ public class WsbootApplication  {
 	   // System.out.println(html);	
 	    	    
 		SpringApplication.run(WsbootApplication.class, args);
-		//String url = "http://localhost:9999/CreaProvincia?nomProvincia=Alacant";
-		String url = "http://localhost:9999/execSqlTable?table=Empleados";
+		String url = "http://localhost:9999/updatePersonas";
+		//String url = "http://localhost:9999/execSqlTable?table=Empleados";
 
 		openbrowser op = new openbrowser();
 		op.openbrowser(url);
+
+		
 		
 		//String url2 = "http://localhost:9999/EmpsListToXML";
 		//openbrowser op2 = new openbrowser();
