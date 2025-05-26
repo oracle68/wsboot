@@ -5,10 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.FormParam;
@@ -55,8 +57,10 @@ public class BookController2 {
 	@Autowired
 	BookService2 bookService2;
 	
-
-    @GetMapping("/books")
+    @Autowired
+    EntityManager entityManager;
+    
+    @GetMapping("/booksPag")
     public List<Book> findAll(
             @RequestParam(defaultValue = "0") int pageNo,
             @RequestParam(defaultValue = "10") int pageSize,
@@ -66,27 +70,36 @@ public class BookController2 {
         return result.getContent();
 
     } 	
+    
     @GetMapping("/bookPage")
-    public void findAllPage(HttpServletRequest request, HttpServletResponse response) 
+    public void findAllPage(int pageNo, int pageSize,HttpServletRequest request, HttpServletResponse response) 
     		throws Exception {
-    	//List<Book>
-    	System.out.println("llega1");
-
         
        
 	PrintWriter out = response.getWriter();
 	response.setContentType("text/html");
-	System.out.println("llega2");
+
 	try {
 
-    	int pageNo = 2; 
-        int pageSize = 10;
+    	//int pageNo = 2; 
+        //int pageSize = 10;
         String sortBy = "id";
         String sortDirection = "ASC";
-    	
+        System.out.println("pageNo "+pageNo);
+        
+		BigDecimal maxbooks =  (BigDecimal) entityManager
+				.createNativeQuery("select count(*) from Book")
+			    .getSingleResult();
+		System.out.println("maxbooks "+maxbooks);
+		int valor = maxbooks.intValueExact() /pageSize;
+		System.out.println("valor "+valor);
+		if (pageSize==0) { pageSize=10;} 
+		if  (pageNo==valor) { pageNo=1;}
+		if (pageNo>valor) { pageNo=1;}
+		
         Page<Book> result = bookService2.findAll(pageNo, pageSize, sortBy, sortDirection);
        // return result.getContent();
-        System.out.println("size "+result.getSize());
+        //System.out.println("size "+result.getSize());
         
 		for (Book  r: result)
 		{	
@@ -98,7 +111,7 @@ public class BookController2 {
     } catch (Exception e) {
 		System.out.println(e);
 	   
-		System.out.println("llega3");	    
+    
 	}	  
 
 	//return "OK";

@@ -50,7 +50,7 @@ public class WsbootApplication  {
 		SpringApplication.run(WsbootApplication.class, args);
 		//String url = "http://localhost:9999/EmpsListProvincia";
 		//String url = "http://localhost:9999/execSqlTable?table=Empleados";
-		String url = "http://localhost:9999/bookPage";
+		String url = "http://localhost:9999/bookPage?pageNo=2&pageSize=10";
 		openbrowser op = new openbrowser();
 		op.openbrowser(url);
 
