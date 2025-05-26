@@ -62,9 +62,7 @@ public class MainRestController {
 	@Autowired
 	BookService bookService;	
 
-	@Autowired
-	BookService2 bookService2;
-	
+
 	@Autowired
 	EmpleadoService  empleadoService;	
 
@@ -73,54 +71,6 @@ public class MainRestController {
 
 	@Autowired
 	PdfTableService  pdfTableService;	
-
-    @GetMapping("/books")
-    public List<Book> findAll(
-            @RequestParam(defaultValue = "0") int pageNo,
-            @RequestParam(defaultValue = "10") int pageSize,
-            @RequestParam(defaultValue = "id") String sortBy,
-            @RequestParam(defaultValue = "ASC") String sortDirection) {
-        Page<Book> result = bookService2.findAll(pageNo, pageSize, sortBy, sortDirection);
-        return result.getContent();
-
-    } 	
-    @GetMapping("/bookPage")
-    public void findAllPage(HttpServletRequest request, HttpServletResponse response) 
-    		throws Exception {
-    	//List<Book>
-    	System.out.println("llega1");
-
-        
-       
-	PrintWriter out = response.getWriter();
-	response.setContentType("text/html");
-	System.out.println("llega2");
-	try {
-
-    	int pageNo = 1; 
-        int pageSize = 10;
-        String sortBy = "id";
-        String sortDirection = "ASC";
-    	
-        Page<Book> result = bookService2.findAll(pageNo, pageSize, sortBy, sortDirection);
-       // return result.getContent();
-        System.out.println("size "+result.getSize());
-        
-		for (Book  r: result)
-		{	
-		 out.println(r.toString()+"<br>");
-		// System.out.println(r.toString());
-		}
-		        
-
-    } catch (Exception e) {
-		System.out.println(e);
-	   
-		System.out.println("llega3");	    
-	}	  
-
-	//return "OK";
-    }
 
     
 	@GetMapping("/form")
