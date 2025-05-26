@@ -48,7 +48,7 @@ public class WsbootApplication  {
 	   // System.out.println(html);	
 	    	    
 		SpringApplication.run(WsbootApplication.class, args);
-		String url = "http://localhost:9999/updatePersonas";
+		String url = "http://localhost:9999/EmpsListProvincia";
 		//String url = "http://localhost:9999/execSqlTable?table=Empleados";
 
 		openbrowser op = new openbrowser();

@@ -131,5 +131,10 @@ public class Empleado  implements java.io.Serializable {
 				+ "]";
 	}
 
+	public String toString2() {
+		return "Emp [  id=" + id + ", name=" + name + ", gender=" + gender + ", adress=" + adress +
+				", city=" + city + ", fecha=" + fecha 
+				+ "]";
+	}	
 }
 

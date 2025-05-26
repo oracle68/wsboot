@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 //import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,7 +47,47 @@ public class EmpleadoController {
     
     @Autowired
     EmpleadoService eService;
- 
+
+    @Autowired
+    EntityManager entityManager;
+    
+	@GetMapping("/EmpsListProvincia")
+	public  @ResponseBody void EmpListProvincia(HttpServletRequest request,
+	        HttpServletResponse response) throws Exception {
+		 PrintWriter out = response.getWriter();
+		 response.setContentType("text/html");
+		try {	
+
+			java.util.List <String> provList = (java.util.List <String>) entityManager
+				    .createNativeQuery(
+				        "SELECT nom FROM provincia"
+				    )
+				    //.setParameter("tabla", table)
+				    .getResultList();	
+			
+	        for(String p : provList) {
+	        	out.println("Provincia: "+p+"<br>");
+				java.util.List <Empleado> empList = (java.util.List <Empleado>) entityManager
+					    .createQuery(
+					        "SELECT e FROM com.wsboot.entity.Empleado e where e.provincia =:prov order by e.provincia"
+					    )
+					    .setParameter("prov", p.toString())
+					    .getResultList();		        	
+				for(Empleado e : empList) {
+					out.println(e.toString2()+"<br>");
+				}
+				
+	        }  			
+				
+	        
+		
+		} catch (Exception e) {
+			
+			System.out.println(e);
+		
+		    throw new Exception(e);
+		}
+}
 
 	@GetMapping("/EmpsListProv")
 	//@RequestMapping(value = "/ProductsListPDF", method = RequestMethod.GET)
