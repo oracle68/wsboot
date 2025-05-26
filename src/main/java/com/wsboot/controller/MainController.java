@@ -9,11 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -51,6 +58,42 @@ public class MainController {
 		return new ModelAndView("menu");
 	}
 	
+
+	@GetMapping("/formulario")
+	public ModelAndView getForm() {
+		
+		return new ModelAndView("formulario");
+	}
+	
+	@PostMapping("/form")
+	public void  postForm(HttpServletRequest request, 
+	        HttpServletResponse response) throws IOException {
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("Method POST <br>");
+		try {
+
+			
+			 String nom = (String) request.getParameter("nom");
+			 String edad = (String) request.getParameter("edad");
+			 
+			 
+			 out.println("parametros: <br>");	
+
+			 
+			 out.println("nom "+nom+"<br>");	
+			 out.println("edad "+edad+"<br>");
+  
+		} catch (Exception e) {
+			System.out.println(e);
+		    //throw new Exception(e);
+			
+		}	
+		
+	}
+
+
 	
 	@GetMapping("/itemsListAngularPDF")
 	public String getItemsListAngularPDF() {

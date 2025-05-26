@@ -4,9 +4,14 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.FormParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -63,6 +68,66 @@ public class MainRestController {
 
 	@Autowired
 	PdfTableService  pdfTableService;	
+
+	@GetMapping("/form")
+	public void  getForm ( HttpServletRequest request, 
+	        HttpServletResponse response) throws IOException {
+		
+		PrintWriter out = response.getWriter();
+		
+		try {
+				
+			 String nom = (String) request.getAttribute("nom");
+			 String edad = (String) request.getAttribute("edad");
+			 
+			 response.setContentType("text/html");
+			 out.println("parametros: <br>");	
+			// out.println("Atrib name "+ +"<br>");
+			// out.println("Atrib age "+request.getAttribute("age") +"<br>");
+			 
+			 out.println("nom "+nom+"<br>");	
+			 out.println("edad "+edad+"<br>");
+			 
+  
+		} catch (Exception e) {
+			System.out.println(e);
+		    //throw new Exception(e);
+			
+		}	
+		
+	}
+	
+	@GetMapping("/form2")
+	public void  getForm2 ( HttpServletRequest request, 
+	        HttpServletResponse response,@FormParam("nom") String nom,
+		    @FormParam("edad") String edad) throws IOException {
+		
+		PrintWriter out = response.getWriter();
+		
+		try {
+				
+			// String name = (String) request.getAttribute("name");
+			// String age = (String) request.getAttribute("age");
+			 
+			 response.setContentType("text/html");
+			 out.println("parametros: <br>");	
+			// out.println("Atrib name "+ +"<br>");
+			// out.println("Atrib age "+request.getAttribute("age") +"<br>");
+			 
+			 out.println("nom "+nom+"<br>");	
+			 out.println("edad "+edad+"<br>");
+			 
+  
+		} catch (Exception e) {
+			System.out.println(e);
+		    //throw new Exception(e);
+			
+		}	
+		
+	}
+	
+
+	
 	
 	@GetMapping("/itemsList")
 	public List <Item>  getItemsList() {
