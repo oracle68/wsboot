@@ -18,15 +18,17 @@
 <label>Search: <input ng-model="element.autor"></label>
 
   <td>{{element.id}}</td>
-  <td>{{element.doc}}</td>
-
+  <td>{{element.autor}}</td>
+  <td>{{element.titulo}}</td>
+  <td>{{element.price}}</td>
+  <td>{{element.fecha}}</td>
 </tr>
  
 </table>
  <script> 
        function MyFilter($scope,$http)
   {           
-    	   $http.get('/book/all')
+    	   $http.get('booksList')
     	    .success(function (response){
     	        $scope.lista = response;
     	        console.log($scope.lista);
