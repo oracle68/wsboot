@@ -250,35 +250,6 @@ public class MainController {
 		return new ModelAndView("itemsListPDF2","items", items);
 		
 	}		
-	
-/*	@GetMapping("/empsPagination")
-	  public String getAllEmps(Model model, @RequestParam(required = false) String keyword,
-	      @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "3") int size) {
-	    try {
-	      List<Empleado> empsList = new ArrayList<Empleado>();
-	      Pageable paging = PageRequest.of(page - 1, size);
 
-	      Page<Empleado> pageTuts;
-	      if (keyword == null) {
-	        pageTuts = empleadoRepository.findAll(paging);
-	      } else {
-	        pageTuts = empleadoRepository.findById(keyword, paging);
-	        model.addAttribute("keyword", keyword);
-	      }
-
-	      empsList = pageTuts.getContent();
-
-	      model.addAttribute("empsList", empsList);
-	      model.addAttribute("currentPage", pageTuts.getNumber() + 1);
-	      model.addAttribute("totalItems", pageTuts.getTotalElements());
-	      model.addAttribute("totalPages", pageTuts.getTotalPages());
-	      model.addAttribute("pageSize", size);
-	    } catch (Exception e) {
-	      model.addAttribute("message", e.getMessage());
-	    }
-
-	    return "empsPagination";
-	  }
-*/	
 	
 }
