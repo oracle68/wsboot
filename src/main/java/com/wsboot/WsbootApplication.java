@@ -52,7 +52,7 @@ public class WsbootApplication  {
 		//String url = "http://localhost:9999/execSqlTable?table=Empleados";
 		//String url = "http://localhost:9999/bookPage?pageNo=2&pageSize=10";
 		//String url = "http://localhost:9999/ListToPdf2?tabla=Empleados";
-		String url = "http://localhost:9999/provsComboList";
+		String url = "http://localhost:9999/CombosLists";
 		
 		openbrowser op = new openbrowser();
 		op.openbrowser(url);
