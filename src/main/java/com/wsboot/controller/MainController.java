@@ -181,11 +181,18 @@ public class MainController {
 		return "provsList";
 	}	
 
+	@GetMapping("/CombosLists")
+	public String getCombosLists() {
+		
+		return "CombosLists";
+	}	
+	
 	@GetMapping("/provsComboList")
 	public String getProvsComboList() {
 		
 		return "provsComboList";
 	}	
+	
 	
 	@GetMapping("/book-grid-app")
 	public String getbookgrid() {
