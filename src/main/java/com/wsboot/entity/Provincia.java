@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.StoredProcedureParameter;
 import javax.persistence.ParameterMode;
@@ -19,6 +21,15 @@ import javax.persistence.Table;
  parameters = {
 		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "provname", type = String.class)
 })
+
+@NamedQueries({
+@NamedQuery(name = "Provincia.findAllByOrderById",
+query = "select u from com.wsboot.entity.Provincia u order by id"),
+@NamedQuery(name = "Provincia.findAllByOrderByNom",
+query = "select u from com.wsboot.entity.Provincia u order by nom")
+})
+
+@NamedNativeQuery(name="Provincia.findAllByNom", query="SELECT nom FROM Provincia order by nom")
 
 /*@NamedNativeQuery(
     name = "Provincia.INSERT_PROVINCIA_FUN",
@@ -42,6 +53,7 @@ public class Provincia implements Serializable{
 	//private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="idprovincia")
 	private Long id;
 	@Column(name="nom")
 	private String nom;

@@ -175,6 +175,18 @@ public class MainController {
 		return "personasListGrid";
 	}		
 
+	@GetMapping("/provsList")
+	public String getProvsList() {
+		
+		return "provsList";
+	}	
+
+	@GetMapping("/provsComboList")
+	public String getProvsComboList() {
+		
+		return "provsComboList";
+	}	
+	
 	@GetMapping("/book-grid-app")
 	public String getbookgrid() {
 		

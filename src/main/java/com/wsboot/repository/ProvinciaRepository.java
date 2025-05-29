@@ -1,6 +1,8 @@
 package com.wsboot.repository;
 
 
+import java.util.List;
+
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -22,5 +24,10 @@ public interface ProvinciaRepository extends JpaRepository<Provincia, Long> {
 	
 	//@Query("SELECT INSERT_PROVINCIA_FUN(:PROVNAME) FROM DUAL")
 	//String callFuncInsertProvincia(String provname);
+	
+	public List <Provincia> findAllByOrderById();
+	public List <Provincia> findAllByOrderByNom();	
+	
+	public List <String> findAllByNom();
 	
 }

@@ -15,15 +15,15 @@ import com.wsboot.repository.ProvinciaRepository;
 @Service
 public class ProvinciaService {
 
-    //@Autowired
-    //ProvinciaRepository pDao;
-
-    private final ProvinciaRepository pDao;
-
     @Autowired
-    public ProvinciaService(ProvinciaRepository pDao) {
-        this.pDao = pDao;
-    }
+    ProvinciaRepository pDao;
+
+  //  private final ProvinciaRepository pDao;
+
+   // @Autowired
+   // public ProvinciaService(ProvinciaRepository pDao) {
+    //    this.pDao = pDao;
+   // }
 
    /* public String callFuncInsertProvincia(String provname) {
         return  pDao.callFuncInsertProvincia(provname);
@@ -39,7 +39,23 @@ public class ProvinciaService {
         return this.pDao.findAll();
     }
 
+    public List <Provincia> findAllByOrderById()
+    {
+        return this.pDao.findAllByOrderById();
+    }    
+    
 
+    public List <Provincia> findAllByOrderByNom()
+    {
+        return this.pDao.findAllByOrderByNom();
+    }    
+    
+
+    public List <String> findAllByNom()
+    {
+        return this.pDao.findAllByNom();
+    }  
+    
     public Page<Provincia> paginas(Pageable pageable){
         return pDao.findAll(pageable);
     }

@@ -38,6 +38,8 @@ import com.wsboot.entity.Persona;
 import com.wsboot.entity.Empleado;
 import com.wsboot.entity.LobTable;
 import com.wsboot.entity.PdfTable;
+import com.wsboot.entity.Provincia;
+
 
 import com.wsboot.service.BookService;
 import com.wsboot.service.BookService2;
@@ -46,6 +48,8 @@ import com.wsboot.service.PersonaService;
 import com.wsboot.service.EmpleadoService;
 import com.wsboot.service.LobTableService;
 import com.wsboot.service.PdfTableService;
+import com.wsboot.service.ProvinciaService;
+
 
 import com.wsboot.util.WriteToFile;
 
@@ -62,6 +66,8 @@ public class MainRestController {
 	@Autowired
 	BookService bookService;	
 
+	@Autowired
+	ProvinciaService provinciaService;	
 
 	@Autowired
 	EmpleadoService  empleadoService;	
@@ -197,6 +203,15 @@ public class MainRestController {
 		return empleadosList;
 	}	
 
+
+	@GetMapping("/ProvsOrderByNom")
+	public List <String> getProvsOrderByNom() {
+		
+		List <String> sList = provinciaService.findAllByNom(); 
+		
+		return sList;
+	}	
+	
 	
 	@RequestMapping(value="/getpdf", method=RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
